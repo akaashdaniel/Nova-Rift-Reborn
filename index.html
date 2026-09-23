@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NOVA RIFT — Space Shooter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />  <title>NOVA RIFT — Space Shooter</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -72,7 +71,16 @@
       <button class="btn-restart" id="restartBtn">RETRY MISSION</button>
     </div>
 
+    </div>
+
+  <!-- ── Touch Controls (mobile) ── -->
+  <div id="touchControls" class="hidden">
+    <div id="joystick">
+      <div id="joystickKnob"></div>
+    </div>
+    <button id="fireBtn" aria-label="Fire">FIRE</button>
   </div>
+
 </div>
 
 <script type="module" src="js/game.js"></script>

@@ -1,4 +1,3 @@
-
 import { unlockAudio, playExplosion, playHit } from './audio.js';
 import { initStars, updateStars, drawStars, drawNebula } from './background.js';
 import {
@@ -19,6 +18,7 @@ import {
   drawParticles, drawScorePopups,
   resetEffects,
 } from './effects.js';
+import { initTouchControls } from './touchControls.js'; 
 
 // ── Canvas Setup 
 const canvas = document.getElementById('gameCanvas');
@@ -37,6 +37,7 @@ const gameOverScreen = document.getElementById('gameOverScreen');
 const finalScoreEl   = document.getElementById('finalScore');
 const finalHiScoreEl = document.getElementById('finalHiScore');
 const newRecordBadge = document.getElementById('newRecordBadge');
+const touchControls  = document.getElementById('touchControls');
 
 // ── Game State 
 let gameState = 'start'; // 'start' | 'playing' | 'gameover'
@@ -111,7 +112,10 @@ function triggerGameOver() {
   finalHiScoreEl.textContent = hiScore;
   newRecordBadge.classList.toggle('show', score >= hiScore && score > 0);
 
-  setTimeout(() => gameOverScreen.classList.remove('hidden'), 800);
+  setTimeout(() => {
+    gameOverScreen.classList.remove('hidden');
+    touchControls.classList.add('hidden');
+  }, 800);
 }
 
 // ── Update 
@@ -266,12 +270,15 @@ document.addEventListener('keyup', e => {
 document.getElementById('startBtn').addEventListener('click', () => {
   unlockAudio();
   startScreen.classList.add('hidden');
+  touchControls.classList.remove('hidden');
   resetGame();
   gameState = 'playing';
 });
 
-document.getElementById('restartBtn').addEventListener('click', () => {
-  gameOverScreen.classList.add('hidden');
+document.getElementById('startBtn').addEventListener('click', () => {
+  unlockAudio();
+  startScreen.classList.add('hidden');
+  touchControls.classList.remove('hidden');
   resetGame();
   gameState = 'playing';
 });
@@ -279,4 +286,5 @@ document.getElementById('restartBtn').addEventListener('click', () => {
 // ── Bootstrap 
 hiScoreEl.textContent = hiScore;
 initStars(W, H);
+initTouchControls(keys);
 requestAnimationFrame(loop);
